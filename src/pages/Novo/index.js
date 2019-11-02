@@ -35,6 +35,7 @@ export default function Novo({history}){
 
   return (
     <>
+    <p className="user-logado">{localStorage.getItem('nome_user') ? `Olá, ${localStorage.getItem('nome_user')}`:''}</p>
     <form onSubmit={handleSubmit}>
       <label 
       id="imagem"

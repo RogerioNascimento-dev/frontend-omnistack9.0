@@ -11,7 +11,11 @@ export default function Login({ history }){
     
     const response = await api.post('/sessions',{ nome, email });
     const { _id } = response.data;    
+    const  nome_usuario = response.data.nome;
+
+    
     localStorage.setItem('user', _id);
+    localStorage.setItem('nome_user', nome_usuario);
     history.push('/dashboard');
   }
   return (
@@ -39,7 +43,7 @@ export default function Login({ history }){
         onChange={event => setEmail(event.target.value)}
         />
         
-        <button type="submit" className="btn">Entrar</button>
+        <button type="submit" className="btn">Cadastrar</button>
       </form>
       </>
   )}

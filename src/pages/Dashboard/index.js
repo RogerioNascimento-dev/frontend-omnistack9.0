@@ -19,6 +19,7 @@ export default function Dashboard(){
 
   return (
     <>
+    <p className="user-logado">{localStorage.getItem('nome_user') ? `Olá, ${localStorage.getItem('nome_user')}`:''}</p>
       <ul className="spot-list">
         {spots.map(spot => (
           <li key={spot._id}>

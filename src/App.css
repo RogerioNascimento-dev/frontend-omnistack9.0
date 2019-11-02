@@ -42,6 +42,11 @@ body, input, button{
   margin-bottom: 30px;
 }
 
+.user-logado{
+  font-size: 15px !important;
+    text-align: right !important;
+    margin-bottom: 15px !important;
+}
 .content > form{
   display: flex;
   flex-direction: column;
