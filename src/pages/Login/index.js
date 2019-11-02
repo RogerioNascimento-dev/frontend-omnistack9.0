@@ -1,16 +1,18 @@
 import React,{ useState } from 'react';
 import api from '../../services/api';
 
-export default function Login(){
+export default function Login({ history }){
   
-  const [email, setEmail] = useState('');
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');  
 
   async function handleSubmit(event){
     event.preventDefault();
     
-    const response = await api.post('/sessions',{ email });
+    const response = await api.post('/sessions',{ nome, email });
     const { _id } = response.data;    
     localStorage.setItem('user', _id);
+    history.push('/dashboard');
   }
   return (
     <>
@@ -19,6 +21,15 @@ export default function Login(){
         e encontre <strong>talentos</strong> para sua empresa.
       </p>
       <form onSubmit={handleSubmit}>
+      <label htmlFor="nome">Nome</label>
+      <input
+      id="nome"
+      type="text"
+      placeholder="Como deseja ser chamado ?"
+      value={nome}
+      onChange={event => setNome(event.target.value)}
+      />
+
         <label htmlFor="email">E-mail *</label>
         <input 
         id="email" 
@@ -27,6 +38,7 @@ export default function Login(){
         value={email}
         onChange={event => setEmail(event.target.value)}
         />
+        
         <button type="submit" className="btn">Entrar</button>
       </form>
       </>
