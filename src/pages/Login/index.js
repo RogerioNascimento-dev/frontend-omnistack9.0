@@ -2,20 +2,15 @@ import React,{ useState } from 'react';
 import api from '../../services/api';
 
 export default function Login({ history }){
-  
-  const [nome, setNome] = useState('');
+    
   const [email, setEmail] = useState('');  
 
   async function handleSubmit(event){
     event.preventDefault();
     
-    const response = await api.post('/sessions',{ nome, email });
-    const { _id } = response.data;    
-    const  nome_usuario = response.data.nome;
-
-    
-    localStorage.setItem('user', _id);
-    localStorage.setItem('nome_user', nome_usuario);
+    const response = await api.post('/sessions',{ email });
+    const { _id } = response.data; 
+    localStorage.setItem('user', _id);    
     history.push('/dashboard');
   }
   return (
@@ -24,15 +19,7 @@ export default function Login({ history }){
         Ofereça <strong>spots</strong> para programadores 
         e encontre <strong>talentos</strong> para sua empresa.
       </p>
-      <form onSubmit={handleSubmit}>
-      <label htmlFor="nome">Nome</label>
-      <input
-      id="nome"
-      type="text"
-      placeholder="Como deseja ser chamado ?"
-      value={nome}
-      onChange={event => setNome(event.target.value)}
-      />
+      <form onSubmit={handleSubmit}>     
 
         <label htmlFor="email">E-mail *</label>
         <input 

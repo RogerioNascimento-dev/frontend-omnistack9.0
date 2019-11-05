@@ -27,3 +27,35 @@ ul.spot-list li span{
   font-size: 15px;
   color: #999;
 }
+
+ul.notificacoes{
+  list-style: none;
+  margin-bottom: 15px;
+}
+ul.notificacoes li{
+  margin-bottom: 15px;
+  font-size: 16px;
+  line-height: 24px;
+}
+ul.notificacoes li p{
+  text-align: left;
+}
+
+ul.notificacoes li button{
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-weight: bold;
+  margin-top: 10px;
+  border: 0;
+  cursor: pointer;
+}
+ul.notificacoes li .btn-regeitar{
+  background-color: rgb(255, 64, 64);
+  color: #FFF;
+}
+
+ul.notificacoes li .btn-aceitar{
+  background-color: rgb(1, 128, 28);
+  color: #FFF;
+}
