@@ -3,10 +3,11 @@ import api from '../../services/api';
 import { Link } from 'react-router-dom';
 import socketio from 'socket.io-client';
 
+
 import './style.css';
 
 
-export default function Dashboard(){
+export default function Dashboard({ history }){
   const [spots, setSpots] = useState([]);
   const [requests, setRequests] = useState([]);
 
@@ -43,9 +44,13 @@ export default function Dashboard(){
     setRequests(requests.filter(request => request._id !== id));
   }
 
+  async function handleLogout(){
+    await localStorage.clear();
+    history.push('/');
+  }
   return (
     <>
-    <button className="user-logado">Olá, {localStorage.getItem('email') ? `${localStorage.getItem('email')}`:'Visitante'}</button>
+    <button onClick={() => handleLogout()} className="user-logado">Olá, {localStorage.getItem('email') ? `${localStorage.getItem('email')}`:'Visitante'}</button>
       
       <ul className="notificacoes">
         {requests.map(request =>(
