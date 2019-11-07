@@ -20,7 +20,7 @@ export default function Dashboard(){
 
   useEffect(() =>{
     socket.on('booking_request', data =>{
-      setRequests([...requests, data]);      
+      setRequests([...requests, data]);           
     })
   },[requests, socket])
 
@@ -29,12 +29,22 @@ export default function Dashboard(){
       const user_id = localStorage.getItem('user');
       const returno = await api.get('/dashboard',{
         headers: {user_id}
-      });   
-      
+      });
       setSpots(returno.data);
     }
     carregarSpots();
   },[]);
+
+  async function handleAccept(id){
+    await api.post(`/bookings/${id}/approvals`);
+    //removendo a exibição da requisição através do filtro 
+    setRequests(requests.filter(request => request._id !== id));
+  }
+
+  async function handleReject(id){
+    await api.post(`/bookings/${id}/rejections`);
+    setRequests(requests.filter(request => request._id !== id));
+  }
 
   return (
     <>
@@ -45,8 +55,8 @@ export default function Dashboard(){
           <li key={request._id}>
             <p><strong>{request.user.email}</strong>, está solicitando uma 
             reserva em <strong>{request.spot.empresa}</strong> para a data <strong>{request.data}</strong>.</p>
-            <button className="btn-aceitar">Aceitar</button>
-            <button className="btn-regeitar">Rejeitar</button>
+            <button className="btn-aceitar"   onClick={() => handleAccept(request._id)} >Aceitar</button>
+            <button className="btn-regeitar"  onClick={() => handleReject(request._id)} >Rejeitar</button>
           </li>
         ))}
         
