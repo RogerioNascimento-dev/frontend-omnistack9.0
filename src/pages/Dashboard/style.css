@@ -59,3 +59,18 @@ ul.notificacoes li .btn-aceitar{
   background-color: rgb(1, 128, 28);
   color: #FFF;
 }
+
+.user-logado{
+  border: none;
+  padding: 5px;  
+  float: right;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 1s;
+}
+
+.user-logado:hover{
+  color: rgba(172, 0, 0, 0.788);  
+  transition: all 1s;
+}

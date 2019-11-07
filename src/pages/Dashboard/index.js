@@ -10,16 +10,13 @@ export default function Dashboard(){
   const [spots, setSpots] = useState([]);
   const [requests, setRequests] = useState([]);
 
-
-
     const user_id = localStorage.getItem('user');
     const socket = useMemo(() => socketio('http://localhost:3333',{
       query:{user_id}
     }),[user_id]);
 
-
   useEffect(() =>{
-    socket.on('booking_request', data =>{
+    socket.on('booking_request', data =>{           
       setRequests([...requests, data]);           
     })
   },[requests, socket])
@@ -48,7 +45,7 @@ export default function Dashboard(){
 
   return (
     <>
-    <p className="user-logado">{localStorage.getItem('nome_user') ? `Olá, ${localStorage.getItem('nome_user')}`:''}</p>
+    <button className="user-logado">Olá, {localStorage.getItem('email') ? `${localStorage.getItem('email')}`:'Visitante'}</button>
       
       <ul className="notificacoes">
         {requests.map(request =>(
